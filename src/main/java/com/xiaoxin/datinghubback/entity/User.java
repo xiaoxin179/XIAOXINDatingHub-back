@@ -1,7 +1,11 @@
 package com.xiaoxin.datinghubback.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import cn.hutool.core.annotation.Alias;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -28,11 +32,19 @@ import lombok.Setter;
 public class User implements Serializable {
 
 private static final long serialVersionUID = 1L;
-
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     private String username;
 
     private String name;
     private String password;
+    private String uid;
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime create_time;
+    @TableField(fill=FieldFill.UPDATE)
+    private LocalDateTime update_time;
+    //    逻辑删除字段
+    @TableLogic(value = "0", delval = "id")
+    private Integer deleted;
 }

@@ -108,6 +108,12 @@
             <artifactId>sa-token-jwt</artifactId>
             <version>${sa-token.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.reini/slf4-cdi -->
+        <dependency>
+            <groupId>net.reini</groupId>
+            <artifactId>slf4-cdi</artifactId>
+            <version>1.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
