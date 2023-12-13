@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 /**
  * @author:XIAOXIN
  * @date:2023/08/12
- * 自动填充实现类
+ * 自动时间填充实现类
  **/
 @Slf4j
 @Component
@@ -20,6 +20,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         log.info("start insert fill ....");
         this.strictInsertFill(metaObject, "create_time", LocalDateTime.class, LocalDateTime.now()); // 起始版本 3.3.0(推荐使用)
+        this.strictInsertFill(metaObject, "update_time", LocalDateTime.class, LocalDateTime.now()); //配置新的策略，在新增的时候也会增加更行时间
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.xiaoxin.datinghubback.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.xiaoxin.datinghubback.entity.User;
@@ -8,6 +9,7 @@ import com.xiaoxin.datinghubback.exception.ServiceException;
 import com.xiaoxin.datinghubback.mapper.UserMapper;
 import com.xiaoxin.datinghubback.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -21,6 +23,7 @@ import java.util.Random;
  * @since 2023-08-02
  */
 @Service
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Override
@@ -48,6 +51,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         } catch (Exception e) {
             throw new RuntimeException("数据库异常");
         }
+    }
+
+    @Override
+    public void sendEmail(String email, String type) {
+        String code = RandomUtil.randomNumbers(6);
+        log.info("本次生成的验证码为：{}", code);
+        String content = "<b>尊敬的XIAOXIN校园交友网站的用户你好：</b><br/>@nbsp;@nbsp;@nbsp;@nbsp;@nbsp;@nbsp;您的验证码为：{code}," + "有效期为五分钟。<br><br><br><br><br><br><b>XIAOXIN交友网</b>";
+        String html = StrUtil.format(content, code);
+
     }
 
     private User saveUser(User user) {

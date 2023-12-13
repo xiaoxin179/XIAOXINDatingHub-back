@@ -25,19 +25,19 @@ import java.util.*;
 /**
  * 代码生成器
  * v1.0
- * 作者：程序员青戈
+ * 作者：xiaoxin
  */
 @Slf4j
 public class CodeGenerator {
 
-    private static final String TABLE = "sys_user";  // 表名
+    private static final String TABLE = "dynamic";  // 表名
     private static final String MODULE_NAME = "动态";  // 菜单名称
 
     private static final String PACKAGE_NAME = "com.xiaoxin.datinghubback";  // java代码的包名
     private static final String AUTHOR = "xiaoxin";   // 作者
 
     //
-//    private static final String VUE_CODE_PATH = "D:\\知识星球\\partner-manager\\src\\views\\";  // vue代码的路径
+//    private static final String VUE_CODE_PATH = "";  // vue代码的路径
 
     /*=========================  下面的不用改动  =========================*/
 

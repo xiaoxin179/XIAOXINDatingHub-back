@@ -17,4 +17,5 @@ public interface IUserService extends IService<User> {
 
     User register(User user);
 
+    void  sendEmail(String email, String type);
 }
