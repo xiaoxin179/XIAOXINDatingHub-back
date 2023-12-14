@@ -1,6 +1,7 @@
 package com.xiaoxin.datinghubback.controller;
 
 import com.xiaoxin.datinghubback.common.Result;
+import com.xiaoxin.datinghubback.controller.domain.UserRquest;
 import com.xiaoxin.datinghubback.entity.User;
 import com.xiaoxin.datinghubback.service.IUserService;
 import io.swagger.annotations.Api;
@@ -34,16 +35,16 @@ public class WebController {
     @PostMapping("login")
     @ApiOperation(value = "用户登录接口")
 //    requestBody解析出请求参数
-    public Result login(@RequestBody User user) {
+    public Result login(@RequestBody UserRquest user) {
         User res = userService.login(user);
         return Result.success(res);
     }
 
     //用户登录注册
-    @PostMapping("register")
+    @PostMapping("/register")
     @ApiOperation(value = "用户注册接口")
 //    requestBody解析出请求参数
-    public Result register(@RequestBody User user) {
+    public Result register(@RequestBody UserRquest user) {
         User res = userService.register(user);
         return Result.success(res);
     }
