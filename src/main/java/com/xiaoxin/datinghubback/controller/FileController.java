@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.xiaoxin.datinghubback.common.Result;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date:2023/08/31 文件处理接口
  **/
 @RestController
+@Api(tags = "文件处理接口下")
 @RequestMapping("/file")
 @Slf4j
 public class FileController {

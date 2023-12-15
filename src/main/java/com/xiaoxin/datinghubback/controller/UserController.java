@@ -1,22 +1,20 @@
 package com.xiaoxin.datinghubback.controller;
 
 import cn.hutool.poi.excel.ExcelUtil;
-import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelWriter;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletOutputStream;
 import java.net.URLEncoder;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
-import java.io.InputStream;
 import java.util.List;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiaoxin.datinghubback.common.Result;
-import org.springframework.web.multipart.MultipartFile;
 import com.xiaoxin.datinghubback.service.IUserService;
 import com.xiaoxin.datinghubback.entity.User;
-
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 * @since 2023-08-02
 */
 @RestController
+@Api(tags="user表的接口")
 @RequestMapping("/user")
 public class UserController {
 
@@ -35,30 +34,35 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping
+    @ApiOperation("保存用户")
     public Result save(@RequestBody User user) {
         userService.save(user);
         return Result.success();
     }
 
     @PutMapping
+    @ApiOperation("更新用户")
     public Result update(@RequestBody User user) {
         userService.updateById(user);
         return Result.success();
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation("逻辑删除")
     public Result delete(@PathVariable Integer id) {
         userService.removeById(id);
         return Result.success();
     }
 
     @PostMapping("/del/batch")
+    @ApiOperation("多个删除")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
         userService.removeByIds(ids);
         return Result.success();
     }
 
     @GetMapping
+    @ApiOperation("获取全部用户")
     public Result findAll() {
         return Result.success(userService.list());
     }
@@ -102,20 +106,9 @@ public class UserController {
 
     }
 
-    /**
-    * excel 导入
-    * @param file
-    * @throws Exception
-    */
-    @PostMapping("/import")
-    public Result imp(MultipartFile file) throws Exception {
-        InputStream inputStream = file.getInputStream();
-        ExcelReader reader = ExcelUtil.getReader(inputStream);
-        // 通过 javabean的方式读取Excel内的对象，但是要求表头必须是英文，跟javabean的属性要对应起来
-        List<User> list = reader.readAll(User.class);
-
-        userService.saveBatch(list);
-        return Result.success();
+    @GetMapping("/getAllUserList")
+    @ApiOperation("获取所有的用户列表")
+    public Result getAllUserList() throws Exception {
+        return Result.success(userService.getAllUserList());
     }
-
 }

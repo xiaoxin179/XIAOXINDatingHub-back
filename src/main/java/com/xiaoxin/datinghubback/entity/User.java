@@ -12,10 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
 * <p>
@@ -29,6 +26,7 @@ import lombok.Setter;
 @Setter
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @TableName("sys_user")
 @ApiModel(value = "User对象", description = "")
 public class User implements Serializable {

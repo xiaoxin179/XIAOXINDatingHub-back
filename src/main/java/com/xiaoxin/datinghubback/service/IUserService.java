@@ -4,6 +4,8 @@ import com.xiaoxin.datinghubback.controller.domain.UserRquest;
 import com.xiaoxin.datinghubback.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.ArrayList;
+
 /**
  * <p>
  *  服务类
@@ -21,4 +23,6 @@ public interface IUserService extends IService<User> {
     void  sendEmail(String email, String type);
 
     User saveUser(User user);
+
+    ArrayList<String> getAllUserList();
 }

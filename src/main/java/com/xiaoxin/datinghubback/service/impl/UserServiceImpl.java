@@ -17,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,6 +37,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private static final long TIME_MIN5 = 5 * 60 * 1000;
     @Resource
     EmailUtils emailUtils;
+    @Resource
+    UserMapper userMapper;
 
     @Override
     public User login(UserRquest user) {
@@ -118,5 +121,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             throw new RuntimeException("注册失败");
         }
         return user;
+    }
+
+    @Override
+    public ArrayList<String> getAllUserList() {
+        ArrayList<String> allUserList = userMapper.getAllUserList();
+        return allUserList;
     }
 }
