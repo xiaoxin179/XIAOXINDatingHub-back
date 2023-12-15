@@ -1,5 +1,4 @@
 package com.xiaoxin.datinghubback.service.impl;
-
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -76,7 +75,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             BeanUtils.copyProperties(user, saveUser);
             return saveUser(saveUser);
         } catch (Exception e) {
-            throw new RuntimeException("数据库异常",e);
+            throw new RuntimeException("数据库异常", e);
         }
     }
 

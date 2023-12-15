@@ -1,6 +1,5 @@
 package com.xiaoxin.datinghubback.controller;
 
-import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelWriter;
@@ -36,47 +35,40 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping
-    @SaCheckPermission("user.add")
     public Result save(@RequestBody User user) {
         userService.save(user);
         return Result.success();
     }
 
     @PutMapping
-    @SaCheckPermission("user.edit")
     public Result update(@RequestBody User user) {
         userService.updateById(user);
         return Result.success();
     }
 
     @DeleteMapping("/{id}")
-    @SaCheckPermission("user.delete")
     public Result delete(@PathVariable Integer id) {
         userService.removeById(id);
         return Result.success();
     }
 
     @PostMapping("/del/batch")
-    @SaCheckPermission("user.deleteBatch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
         userService.removeByIds(ids);
         return Result.success();
     }
 
     @GetMapping
-    @SaCheckPermission("user.list")
     public Result findAll() {
         return Result.success(userService.list());
     }
 
     @GetMapping("/{id}")
-    @SaCheckPermission("user.list")
     public Result findOne(@PathVariable Integer id) {
         return Result.success(userService.getById(id));
     }
 
     @GetMapping("/page")
-    @SaCheckPermission("user.list")
     public Result findPage(@RequestParam(defaultValue = "") String name,
                            @RequestParam Integer pageNum,
                            @RequestParam Integer pageSize) {
@@ -89,7 +81,6 @@ public class UserController {
     * 导出接口
     */
     @GetMapping("/export")
-    @SaCheckPermission("user.export")
     public void export(HttpServletResponse response) throws Exception {
         // 从数据库查询出所有的数据
         List<User> list = userService.list();
@@ -117,7 +108,6 @@ public class UserController {
     * @throws Exception
     */
     @PostMapping("/import")
-    @SaCheckPermission("user.import")
     public Result imp(MultipartFile file) throws Exception {
         InputStream inputStream = file.getInputStream();
         ExcelReader reader = ExcelUtil.getReader(inputStream);

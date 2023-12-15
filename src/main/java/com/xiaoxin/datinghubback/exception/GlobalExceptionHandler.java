@@ -1,7 +1,4 @@
 package com.xiaoxin.datinghubback.exception;
-
-import cn.dev33.satoken.exception.NotPermissionException;
-import cn.dev33.satoken.exception.SaTokenException;
 import cn.hutool.core.util.StrUtil;
 import com.xiaoxin.datinghubback.common.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -20,17 +17,7 @@ public class GlobalExceptionHandler {
         return Result.error("500", "数据重复");
     }
 
-    @ExceptionHandler(value = NotPermissionException.class)
-    public Result notPermissionException(NotPermissionException e) {
-        log.error("权限验证错误", e);
-        return Result.error("401", "无权限");
-    }
 
-    @ExceptionHandler(value = SaTokenException.class)
-    public Result notLoginException(SaTokenException e) {
-        log.error("权限验证错误", e);
-        return Result.error("401", "请登录");
-    }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public Result methodArgumentNotValidException(MethodArgumentNotValidException e) {

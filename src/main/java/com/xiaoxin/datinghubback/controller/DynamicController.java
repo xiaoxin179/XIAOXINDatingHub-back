@@ -1,6 +1,5 @@
 package com.xiaoxin.datinghubback.controller;
 
-import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelWriter;
@@ -36,47 +35,40 @@ public class DynamicController {
     private IDynamicService dynamicService;
 
     @PostMapping
-    @SaCheckPermission("dynamic.add")
     public Result save(@RequestBody Dynamic dynamic) {
         dynamicService.save(dynamic);
         return Result.success();
     }
 
     @PutMapping
-    @SaCheckPermission("dynamic.edit")
     public Result update(@RequestBody Dynamic dynamic) {
         dynamicService.updateById(dynamic);
         return Result.success();
     }
 
     @DeleteMapping("/{id}")
-    @SaCheckPermission("dynamic.delete")
     public Result delete(@PathVariable Integer id) {
         dynamicService.removeById(id);
         return Result.success();
     }
 
     @PostMapping("/del/batch")
-    @SaCheckPermission("dynamic.deleteBatch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
         dynamicService.removeByIds(ids);
         return Result.success();
     }
 
     @GetMapping
-    @SaCheckPermission("dynamic.list")
     public Result findAll() {
         return Result.success(dynamicService.list());
     }
 
     @GetMapping("/{id}")
-    @SaCheckPermission("dynamic.list")
     public Result findOne(@PathVariable Integer id) {
         return Result.success(dynamicService.getById(id));
     }
 
     @GetMapping("/page")
-    @SaCheckPermission("dynamic.list")
     public Result findPage(@RequestParam(defaultValue = "") String name,
                            @RequestParam Integer pageNum,
                            @RequestParam Integer pageSize) {
@@ -89,7 +81,6 @@ public class DynamicController {
     * 导出接口
     */
     @GetMapping("/export")
-    @SaCheckPermission("dynamic.export")
     public void export(HttpServletResponse response) throws Exception {
         // 从数据库查询出所有的数据
         List<Dynamic> list = dynamicService.list();
@@ -117,7 +108,6 @@ public class DynamicController {
     * @throws Exception
     */
     @PostMapping("/import")
-    @SaCheckPermission("dynamic.import")
     public Result imp(MultipartFile file) throws Exception {
         InputStream inputStream = file.getInputStream();
         ExcelReader reader = ExcelUtil.getReader(inputStream);
