@@ -103,48 +103,5 @@ public class ${table.controllerName} {
         return Result.success(${table.entityPath}Service.page(new Page<>(pageNum, pageSize), queryWrapper));
     }
 
-    /**
-    * 导出接口
-    */
-    @GetMapping("/export")
-    @SaCheckPermission("${table.entityPath}.export")
-    public void export(HttpServletResponse response) throws Exception {
-        // 从数据库查询出所有的数据
-        List<${entity}> list = ${table.entityPath}Service.list();
-        // 在内存操作，写出到浏览器
-        ExcelWriter writer = ExcelUtil.getWriter(true);
-
-        // 一次性写出list内的对象到excel，使用默认样式，强制输出标题
-        writer.write(list, true);
-
-        // 设置浏览器响应的格式
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
-        String fileName = URLEncoder.encode("${entity}信息表", "UTF-8");
-        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ".xlsx");
-
-        ServletOutputStream out = response.getOutputStream();
-        writer.flush(out, true);
-        out.close();
-        writer.close();
-
-    }
-
-    /**
-    * excel 导入
-    * @param file
-    * @throws Exception
-    */
-    @PostMapping("/import")
-    @SaCheckPermission("${table.entityPath}.import")
-    public Result imp(MultipartFile file) throws Exception {
-        InputStream inputStream = file.getInputStream();
-        ExcelReader reader = ExcelUtil.getReader(inputStream);
-        // 通过 javabean的方式读取Excel内的对象，但是要求表头必须是英文，跟javabean的属性要对应起来
-        List<${entity}> list = reader.readAll(${entity}.class);
-
-        ${table.entityPath}Service.saveBatch(list);
-        return Result.success();
-    }
-
 }
 </#if>
