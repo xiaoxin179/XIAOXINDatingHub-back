@@ -50,4 +50,5 @@ private static final long serialVersionUID = 1L;
     @TableLogic(value = "0", delval = "id")
     private Integer deleted;
     private String email;
+    private String avatar;
 }

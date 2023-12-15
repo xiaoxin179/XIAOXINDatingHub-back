@@ -32,7 +32,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-    //    模拟缓存的使用
     private static final Map<String, Long> CODE_MAP = new ConcurrentHashMap<>();
     private static final long TIME_MIN5 = 5 * 60 * 1000;
     @Resource
