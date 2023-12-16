@@ -11,6 +11,9 @@ import javax.annotation.Resource;
 class DatingHubBackApplicationTests {
     @Resource
     IUserService userService;
+    @Resource
+    ChartGPT chartGPT;
+
     @Test
     void contextLoads() {
         boolean b = userService.removeById(14);
@@ -29,5 +32,7 @@ class DatingHubBackApplicationTests {
     void getUserByName() {
 
     }
+
+
 
 }

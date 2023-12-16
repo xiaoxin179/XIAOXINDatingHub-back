@@ -1,4 +1,5 @@
 package com.xiaoxin.datinghubback.service.impl;
+
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -127,5 +128,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public ArrayList<String> getAllUserList() {
         ArrayList<String> allUserList = userMapper.getAllUserList();
         return allUserList;
+    }
+
+    @Override
+    public User updatepassword(User user) {
+        User updateUser = getOne(new QueryWrapper<User>().eq("id", user.getId()));
+        if (!updateUser.getIdcard().equals(user.getIdcard())) {
+            throw new ServiceException("校验错误，您输入的身份证号和数据库中不匹配");
+        }
+        saveOrUpdate(user);
+        return user;
     }
 }

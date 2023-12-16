@@ -84,31 +84,18 @@ public class UserController {
     /**
     * 导出接口
     */
-    @GetMapping("/export")
-    public void export(HttpServletResponse response) throws Exception {
-        // 从数据库查询出所有的数据
-        List<User> list = userService.list();
-        // 在内存操作，写出到浏览器
-        ExcelWriter writer = ExcelUtil.getWriter(true);
-
-        // 一次性写出list内的对象到excel，使用默认样式，强制输出标题
-        writer.write(list, true);
-
-        // 设置浏览器响应的格式
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
-        String fileName = URLEncoder.encode("User信息表", "UTF-8");
-        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ".xlsx");
-
-        ServletOutputStream out = response.getOutputStream();
-        writer.flush(out, true);
-        out.close();
-        writer.close();
-
-    }
 
     @GetMapping("/getAllUserList")
     @ApiOperation("获取所有的用户列表")
     public Result getAllUserList() throws Exception {
         return Result.success(userService.getAllUserList());
     }
+    @ApiOperation("根据用户id修改用户密码")
+    @PutMapping("/updatepassword")
+    public Result updatepassword(@RequestBody User user) throws Exception {
+        return Result.success(userService.updatepassword(user));
+    }
+
+
+
 }

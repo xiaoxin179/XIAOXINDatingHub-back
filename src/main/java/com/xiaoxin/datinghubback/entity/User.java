@@ -49,4 +49,5 @@ private static final long serialVersionUID = 1L;
     private Integer deleted;
     private String email;
     private String avatar;
+    private String idcard;
 }

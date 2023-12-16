@@ -25,4 +25,6 @@ public interface IUserService extends IService<User> {
     User saveUser(User user);
 
     ArrayList<String> getAllUserList();
+
+    User updatepassword(User user);
 }

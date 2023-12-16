@@ -14,7 +14,7 @@
     <name>XIAOXINDatingHub-back</name>
     <description>XIAOXINDatingHub-back</description>
     <properties>
-        <java.version>8</java.version>
+        <java.version>17</java.version>
         <mybatis-plus.vesion>3.5.2</mybatis-plus.vesion>
         <sa-token.version>1.33.0</sa-token.version>
     </properties>
@@ -111,8 +111,37 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
+        <!--        导入阿里云需要的依赖-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>broadscope-bailian-sdk-java</artifactId>
+            <version>1.1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>bailian20230601</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp-sse</artifactId>
+            <version>4.9.1</version>
+        </dependency>
+        <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.72</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -129,7 +158,6 @@
             </plugin>
         </plugins>
     </build>
-
     <repositories>
         <repository>
             <id>nexus-aliyun</id>
@@ -143,7 +171,6 @@
             </snapshots>
         </repository>
     </repositories>
-
     <pluginRepositories>
         <pluginRepository>
             <id>public</id>
