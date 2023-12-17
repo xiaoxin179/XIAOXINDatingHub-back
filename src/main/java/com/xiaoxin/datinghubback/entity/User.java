@@ -50,4 +50,5 @@ private static final long serialVersionUID = 1L;
     private String email;
     private String avatar;
     private String idcard;
+    private Integer account;
 }

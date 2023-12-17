@@ -70,7 +70,6 @@ public class FileController {
         file.transferTo(updateFile);
         return Result.success("http://" + downloadIp + ":" + serverPort + "/file/" + fileFullName);
     }
-
     @GetMapping("/{fileFullName}")
     public void downloadFile(@PathVariable String fileFullName, HttpServletResponse response) throws IOException {
         String fullUploadPath = getFillUploadPath(fileFullName);

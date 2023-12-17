@@ -47,7 +47,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         try {
             dbUser = getOne(new UpdateWrapper<User>().eq("username", user.getUsername()));
         } catch (Exception e) {
-            throw new RuntimeException("系统异常");
+            throw new RuntimeException("系统异常",e);
         }
         if (dbUser == null) {
             throw new ServiceException("未找到用户");
@@ -57,7 +57,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         return dbUser;
     }
-
     @Override
     public User register(UserRquest user) {
         String emailCode = user.getEmailCode();
