@@ -30,8 +30,8 @@ import java.util.*;
 @Slf4j
 public class CodeGenerator {
 
-    private static final String TABLE = "im_with_user";  // 表名
-    private static final String MODULE_NAME = "动态";  // 菜单名称
+    private static final String TABLE = "gpt";  // 表名
+    private static final String MODULE_NAME = "问答记录";  // 菜单名称
 
     private static final String PACKAGE_NAME = "com.xiaoxin.datinghubback";  // java代码的包名
     private static final String AUTHOR = "xiaoxin";   // 作者
