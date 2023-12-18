@@ -3,12 +3,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.io.InputStream;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiaoxin.datinghubback.common.Result;
 import org.springframework.web.multipart.MultipartFile;
 import com.xiaoxin.datinghubback.service.IImService;
 import com.xiaoxin.datinghubback.entity.Im;
+
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 * </p>
 *
 * @author xiaoxin
-* @since 2023-12-16
+* @since 2023-12-17
 */
 @RestController
 @RequestMapping("/im")
@@ -36,6 +40,12 @@ public class ImController {
     public Result update(@RequestBody Im im) {
         imService.updateById(im);
         return Result.success();
+    }
+    @GetMapping("/init/{limit}")
+    public Result findAllInit(@PathVariable Integer limit) {
+        List<Im> ims = imService.list(new QueryWrapper<Im>().orderByDesc("id").last("limit " + limit));
+
+        return Result.success(ims.stream().sorted(Comparator.comparing(Im::getId)).collect(Collectors.toList()));
     }
 
     @DeleteMapping("/{id}")

@@ -1,11 +1,11 @@
 package com.xiaoxin.datinghubback.service.impl;
 
 import cn.hutool.core.lang.Dict;
-import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.xiaoxin.datinghubback.entity.Im;
 import com.xiaoxin.datinghubback.entity.User;
 import com.xiaoxin.datinghubback.service.IImService;
@@ -96,13 +96,13 @@ public class WebSorketServer {
             return;
         }
 
-//        Im im = Im.builder().uid(uid).username(user.getName()).avatar(user.getAvatar()).sign(user.getSign())
-//                .createTime(LocalDateTime.now()).text(message).build();
-//        // 存储数据到数据库
-//        staticImService.save(im);
-//        String jsonStr = new ObjectMapper().writeValueAsString(im);  // 处理后的消息体
-        this.sendAllMessage(message);
-        log.info("发送消息：{}", message);
+        Im im = Im.builder().uid(uid)
+                .createTime(LocalDateTime.now()).text(message).build();
+        // 存储数据到数据库
+        staticImService.save(im);
+        String jsonStr = new ObjectMapper().writeValueAsString(im);  // 处理后的消息体
+        this.sendAllMessage(jsonStr);
+        log.info("发送消息：{}", jsonStr);
     }
 
     @OnError
@@ -141,3 +141,4 @@ public class WebSorketServer {
         }
     }
 }
+
