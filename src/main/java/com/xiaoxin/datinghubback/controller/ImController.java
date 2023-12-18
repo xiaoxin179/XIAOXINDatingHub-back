@@ -1,5 +1,7 @@
 package com.xiaoxin.datinghubback.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiaoxin.datinghubback.entity.ImWithUser;
+import com.xiaoxin.datinghubback.service.IImWithUserService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.io.InputStream;
@@ -29,6 +31,8 @@ public class ImController {
 
     @Resource
     private IImService imService;
+    @Resource
+    private IImWithUserService imWithUserService;
 
     @PostMapping
     public Result save(@RequestBody Im im) {
@@ -43,9 +47,9 @@ public class ImController {
     }
     @GetMapping("/init/{limit}")
     public Result findAllInit(@PathVariable Integer limit) {
-        List<Im> ims = imService.list(new QueryWrapper<Im>().orderByDesc("id").last("limit " + limit));
+        List<ImWithUser> ims = imWithUserService.list(new QueryWrapper<ImWithUser>().orderByDesc("id").last("limit " + limit));
 
-        return Result.success(ims.stream().sorted(Comparator.comparing(Im::getId)).collect(Collectors.toList()));
+        return Result.success(ims.stream().sorted(Comparator.comparing(ImWithUser::getId)).collect(Collectors.toList()));
     }
 
     @DeleteMapping("/{id}")

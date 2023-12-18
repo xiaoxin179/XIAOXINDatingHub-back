@@ -1,25 +1,38 @@
 package com.xiaoxin.datinghubback.entity;
 
-import cn.hutool.core.annotation.Alias;
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import cn.hutool.core.annotation.Alias;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.xiaoxin.datinghubback.common.LDTConfig;
-import io.swagger.annotations.ApiModelProperty;
-
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * @author:XIAOXIN
- * @date:2023/12/18
- **/
-public class ImWithUser {
+* <p>
+* VIEW
+* </p>
+*
+* @author xiaoxin
+* @since 2023-12-18
+*/
+@Getter
+@Setter
+@TableName("im_with_user")
+@ApiModel(value = "ImWithUser对象", description = "VIEW")
+public class ImWithUser implements Serializable {
+
+private static final long serialVersionUID = 1L;
+
+    // 主键
     @ApiModelProperty("主键")
     @Alias("主键")
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     // 发送消息的内容
@@ -39,6 +52,14 @@ public class ImWithUser {
     @ApiModelProperty("发送者")
     @Alias("发送者")
     private String uid;
-    private String username;
+
+    // 用户头像
+    @ApiModelProperty("用户头像")
+    @Alias("用户头像")
     private String avatar;
+
+    // 用户名
+    @ApiModelProperty("用户名")
+    @Alias("用户名")
+    private String username;
 }
